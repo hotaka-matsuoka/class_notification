@@ -18,8 +18,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["LINE_BOT_CHANNEL_TOKEN"]
-# YOUR_CHANNEL_SECRET = os.environ["LINE_BOT_CHANNEL_SECRET"]
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ["LINE_BOT_CHANNEL_TOKEN"]
+YOUR_CHANNEL_SECRET = os.environ["LINE_BOT_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
@@ -70,7 +70,7 @@ if __name__ == "__main__":
             class_info_ary = scrapy()
             send_message(class_info_ary)
 
-    schedule.every().day.at("22:10").do(start)
+    schedule.every().day.at("22:18").do(start)
     while True:
         schedule.run_pending()
-        time.sleep(60)
+        time.sleep(1)
