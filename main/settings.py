@@ -9,3 +9,4 @@ load_dotenv(dotenv_path)
 
 student_id = os.environ.get("STUDENT_ID")
 password = os.environ.get("PASSWORD")
+user_id = os.environ.get("USER_ID")
