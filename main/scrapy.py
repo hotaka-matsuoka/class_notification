@@ -49,6 +49,3 @@ def infomation_check(info):
     return "本日は休校です"
   else:
     return "エラー"
-
-result = scrapy()
-print(result)
