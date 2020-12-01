@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import os
+import settings
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -20,7 +21,7 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 def send_message():
-    user_id = 'Ud078fbbf5959224b87d8705747054a70'
+    user_id = os.environ.get["USER_ID"]
     message = TextSendMessage(text=f"こんにちは\n\n"
                                    f"最近はどう？")
     line_bot_api.push_message(user_id, message)
@@ -53,6 +54,6 @@ def handle_message(event):
 
 if __name__ == "__main__":
     # app.run()
-    # port = int(os.getenv("PORT"))
-    # app.run(host="0.0.0.0", port=port)
+    port = int(os.getenv("PORT"))
+    app.run(host="0.0.0.0", port=port)
     send_message()
