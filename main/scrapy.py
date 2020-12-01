@@ -22,6 +22,27 @@ time.sleep(5)
 iframe = driver.find_element_by_xpath('/html/body/table[2]/tbody/tr/td/table[2]/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/iframe')
 driver.switch_to.frame(iframe)
 
+def scrapy(driver):
+  class_info_ary = []
+  for i  in range(3):
+    i += 1
+    class_info = []
+    try:
+      period = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}/dt').text
+      subject = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}//a').text
+      classroom = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}/dd[2]').text
+      try:
+        info = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"]/dl{[i]}//img').get_attribute('alt')
+        info = infomation_check(info)
+      except:
+        info = "連絡事項はありません"
+
+      class_info.extend([period, subject, classroom, info])
+      class_info_ary.append(class_info)
+    except:
+      pass
+  return class_info_ary
+
 def infomation_check(info):
   if info == "連絡":
     return "連絡事項があります"
@@ -30,26 +51,8 @@ def infomation_check(info):
   else:
     return "エラー"
 
-class_info_ary = []
-for i  in range(3):
-  i += 1
-  class_info = []
-  try:
-    period = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}/dt').text
-    subject = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}//a').text
-    classroom = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}/dd[2]').text
-    try:
-      info = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"]/dl{[i]}//img').get_attribute('alt')
-      info = infomation_check(info)
-    except:
-      info = "連絡事項はありません"
-
-    class_info.extend([period, subject, classroom, info])
-    class_info_ary.append(class_info)
-  except:
-    pass
-
-print(class_info_ary)
-
+result = scrapy(driver)
 time.sleep(5)
 driver.quit()
+
+print(result)
