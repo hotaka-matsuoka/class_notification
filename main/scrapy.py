@@ -22,6 +22,14 @@ time.sleep(5)
 iframe = driver.find_element_by_xpath('/html/body/table[2]/tbody/tr/td/table[2]/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/iframe')
 driver.switch_to.frame(iframe)
 
+def infomation_check(info):
+  if info == "連絡":
+    return "連絡事項があります"
+  elif info == "休校":
+    return "本日は休校です"
+  else:
+    return "エラー"
+
 class_info_ary = []
 for i  in range(3):
   i += 1
@@ -32,6 +40,7 @@ for i  in range(3):
     classroom = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}/dd[2]').text
     try:
       info = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"]/dl{[i]}//img').get_attribute('alt')
+      info = infomation_check(info)
     except:
       info = "連絡事項はありません"
 
