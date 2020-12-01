@@ -1,6 +1,7 @@
 from flask import Flask, request, abort
 import os
 from settings import YOUR_CHANNEL_ACCESS_TOKEN, YOUR_CHANNEL_SECRET, USER_ID
+from scrapy import scrapy 
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -20,8 +21,8 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-def send_message():
-    text_content = "おはようございます!\n【本日の時間割】\n 1限 : hoge\n 2限 : foo"
+def send_message(period, subject, classroom, info):
+    text_content = f"おはようございます!\n【本日の時間割】\n {period}限 : {subject}\n {classroom}\n {info}"
     message = TextSendMessage(text=text_content)
     line_bot_api.push_message(USER_ID, message)
 
@@ -56,4 +57,10 @@ if __name__ == "__main__":
     # app.run()
     # port = int(os.getenv("PORT"))
     # app.run(host="0.0.0.0", port=port)
-    send_message()
+    class_info_ary = scrapy()
+    class_info = class_info_ary[0]
+    period = class_info[0]
+    subject = class_info[1]
+    classroom = class_info[2]
+    info = class_info[3]
+    send_message(period, subject, classroom, info)
