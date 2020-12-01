@@ -1,5 +1,8 @@
-from flask import Flask, request, abort
 import os
+import date
+import schedule
+import time
+from flask import Flask, request, abort
 from settings import YOUR_CHANNEL_ACCESS_TOKEN, YOUR_CHANNEL_SECRET, USER_ID
 from scrapy import scrapy 
 
@@ -22,9 +25,9 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 def send_message(list):
-    content = "おはようございます!\n【本日の時間割】\n"
+    content = f"{date.month}月{date.day}日({date.day_of_week}) おはようございます!\n\n【 本日の時間割 】\n"
     for l in list:
-        content += f"{l[0]}限 : {l[1]}\n {l[2]}\n {l[3]}\n"
+        content += f"{l[0]}限 : {l[1]}\n {l[2]}\n {l[3]}\n\n"
     message = TextSendMessage(text=content)
     line_bot_api.push_message(USER_ID, message)
 
@@ -59,5 +62,15 @@ if __name__ == "__main__":
     # app.run()
     # port = int(os.getenv("PORT"))
     # app.run(host="0.0.0.0", port=port)
-    class_info_ary = scrapy()
-    send_message(class_info_ary)
+
+    def start():
+        if date.day_of_week == "水" or date.day_of_week == "日":
+            pass
+        else:
+            class_info_ary = scrapy()
+            send_message(class_info_ary)
+
+    schedule.every().day.at("08:00").do(start)
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
