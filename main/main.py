@@ -19,12 +19,13 @@ YOUR_CHANNEL_SECRET = os.environ["LINE_BOT_CHANNEL_SECRET"]
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-@app.route("/send_message")
+
 def send_message():
     user_id = 'Ud078fbbf5959224b87d8705747054a70'
     message = TextSendMessage(text=f"こんにちは\n\n"
-                                    f"最近はどう？")
+                                   f"最近はどう？")
     line_bot_api.push_message(user_id, message)
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -54,6 +55,6 @@ def handle_message(event):
 
 if __name__ == "__main__":
     # app.run()
-    port = int(os.getenv("PORT"))
-    app.run(host="0.0.0.0", port=port)
+    # port = int(os.getenv("PORT"))
+    # app.run(host="0.0.0.0", port=port)
     send_message()
