@@ -70,7 +70,7 @@ if __name__ == "__main__":
             class_info_ary = scrapy()
             send_message(class_info_ary)
 
-    schedule.every().day.at("22:18").do(start)
+    schedule.every().day.at("22:20").do(start)
     while True:
         schedule.run_pending()
         time.sleep(1)
