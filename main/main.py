@@ -59,9 +59,9 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    # app.run()
-    # port = int(os.getenv("PORT"))
-    # app.run(host="0.0.0.0", port=port)
+    app.run()
+    port = int(os.getenv("PORT"))
+    app.run(host="0.0.0.0", port=port)
 
     def start():
         # if date.day_of_week == "水" or date.day_of_week == "日":
@@ -70,7 +70,7 @@ if __name__ == "__main__":
         class_info_ary = scrapy()
         send_message(class_info_ary)
 
-    schedule.every().day.at("22:50").do(start)
+    schedule.every().day.at("22:55").do(start)
     while True:
         schedule.run_pending()
         time.sleep(1)
