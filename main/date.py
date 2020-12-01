@@ -1,7 +1,7 @@
 import datetime
 import time
 import locale
-locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
+locale.setlocale(locale.LC_TIME, '')
 
 dt_now = datetime.datetime.now()
 year = dt_now.year
