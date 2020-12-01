@@ -64,13 +64,13 @@ if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=port)
 
     def start():
-        if date.day_of_week == "水" or date.day_of_week == "日":
-            pass
-        else:
-            class_info_ary = scrapy()
-            send_message(class_info_ary)
+        # if date.day_of_week == "水" or date.day_of_week == "日":
+        #     pass
+        # else:
+        class_info_ary = scrapy()
+        send_message(class_info_ary)
 
-    schedule.every().day.at("22:44").do(start)
+    schedule.every().day.at("22:50").do(start)
     while True:
         schedule.run_pending()
         time.sleep(1)
