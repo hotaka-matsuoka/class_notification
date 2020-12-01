@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import os
+from settings import YOUR_CHANNEL_ACCESS_TOKEN, YOUR_CHANNEL_SECRET, user_id
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -13,17 +14,15 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ["LINE_BOT_CHANNEL_TOKEN"]
-YOUR_CHANNEL_SECRET = os.environ["LINE_BOT_CHANNEL_SECRET"]
+# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["LINE_BOT_CHANNEL_TOKEN"]
+# YOUR_CHANNEL_SECRET = os.environ["LINE_BOT_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-
 def send_message():
-    user_id = 'Ud078fbbf5959224b87d8705747054a70'
-    message = TextSendMessage(text=f"こんにちは\n\n"
-                                   f"最近はどう？")
+    text_content = "おはようございます!\n【本日の時間割】\n 1限 : hoge\n 2限 : foo"
+    message = TextSendMessage(text=text_content)
     line_bot_api.push_message(user_id, message)
 
 
