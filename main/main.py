@@ -5,7 +5,7 @@ from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+    InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
@@ -21,7 +21,11 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/")
 def hello_world():
-    return "hello world!"
+    try:
+        line_bot_api.push_message('Ud078fbbf5959224b87d8705747054a70', TextSendMessage(text='Hello World!'))
+    except LineBotApiError as e:
+        print(e)
+    # error handle
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -47,6 +51,7 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+    line_bot_api.push_message('Ud078fbbf5959224b87d8705747054a70', TextSendMessage(text='Hello World!'))
 
 
 if __name__ == "__main__":
