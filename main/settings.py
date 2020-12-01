@@ -9,4 +9,6 @@ load_dotenv(dotenv_path)
 
 student_id = os.environ.get("STUDENT_ID")
 password = os.environ.get("PASSWORD")
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_BOT_CHANNEL_TOKEN")
+YOUR_CHANNEL_SECRET = os.environ.get("LINE_BOT_CHANNEL_SECRET")
 user_id = os.environ.get("USER_ID")
