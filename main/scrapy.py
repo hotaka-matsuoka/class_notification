@@ -14,8 +14,8 @@ def scrapy():
   student_id = driver.find_element_by_name("IDToken1")
   password = driver.find_element_by_name("IDToken2")
   login = driver.find_element_by_name("Login.Submit")
-  student_id.send_keys(STUDENT_ID)
-  password.send_keys(PASSWORD)
+  student_id.send_keys(os.environ["STUDENT_ID"])
+  password.send_keys(os.environ["PASSWORD"])
   login.submit()
 
   time.sleep(5)
