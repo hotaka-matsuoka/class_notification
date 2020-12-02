@@ -4,9 +4,7 @@ def scrapy():
   from selenium.webdriver.chrome.options import Options
   from settings import STUDENT_ID, PASSWORD
 
-  options = Options()
-  options.add_argument('--headless')
-  driver = webdriver.Chrome('/usr/local/bin/chromedriver', chrome_options=options)
+  driver = webdriver.Chrome()
   driver.get('https://portal.kansai-u.ac.jp/Portal/index.jsp')
   time.sleep(5)
 
