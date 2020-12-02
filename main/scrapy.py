@@ -1,10 +1,10 @@
 def scrapy():
   import time
-  import os
   from selenium import webdriver
   from selenium.webdriver.chrome.options import Options
   from settings import STUDENT_ID, PASSWORD
 
+  options.add_argument()
   driver = webdriver.Chrome()
   driver.get('https://portal.kansai-u.ac.jp/Portal/index.jsp')
   time.sleep(5)
@@ -13,8 +13,8 @@ def scrapy():
   student_id = driver.find_element_by_name("IDToken1")
   password = driver.find_element_by_name("IDToken2")
   login = driver.find_element_by_name("Login.Submit")
-  student_id.send_keys(os.environ["STUDENT_ID"])
-  password.send_keys(os.environ["PASSWORD"])
+  student_id.send_keys(STUDENT_ID)
+  password.send_keys(PASSWORD)
   login.submit()
 
   time.sleep(5)
