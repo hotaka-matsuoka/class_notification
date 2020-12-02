@@ -1,5 +1,6 @@
 def scrapy():
   import time
+  import os
   from selenium import webdriver
   from selenium.webdriver.chrome.options import Options
   from settings import STUDENT_ID, PASSWORD
