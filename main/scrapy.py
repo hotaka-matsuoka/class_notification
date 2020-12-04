@@ -1,10 +1,8 @@
 def scrapy():
   import time
   from selenium import webdriver
-  from selenium.webdriver.chrome.options import Options
   from settings import STUDENT_ID, PASSWORD
 
-  options.add_argument()
   driver = webdriver.Chrome()
   driver.get('https://portal.kansai-u.ac.jp/Portal/index.jsp')
   time.sleep(5)
