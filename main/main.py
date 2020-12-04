@@ -1,10 +1,9 @@
-import os
 import date
 import schedule
 import time
 from flask import Flask, request, abort
 from settings import YOUR_CHANNEL_ACCESS_TOKEN, YOUR_CHANNEL_SECRET, USER_ID
-from scrapy import scrapy 
+from scrapy import scrapy
 
 from linebot import (
     LineBotApi, WebhookHandler
