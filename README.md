@@ -12,7 +12,7 @@
 - UIが古いため使いづらい
 
 # キャプチャ
-![画像](images/IMG_0855.PNG)
+<img src="images/IMG_0855.PNG" width="300px">
 
 # 設計
 1. seleniumで大学の自分のアカウントのサイトにログイン
