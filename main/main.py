@@ -59,4 +59,5 @@ if __name__ == "__main__":
     # port = int(os.getenv("PORT"))
     # app.run(host="0.0.0.0", port=port)
     class_info_ary = scrapy()
-    send_message(class_info_ary)
+    if not len(class_info_ary) == 0:
+        send_message(class_info_ary)

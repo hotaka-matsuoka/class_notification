@@ -22,7 +22,7 @@ def scrapy():
   time.sleep(5)
 
   class_info_ary = []
-  for i  in range(3):
+  for i  in range(5):
     i += 1
     class_info = []
     try:
