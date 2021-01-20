@@ -1,6 +1,7 @@
 # スケジュール通知BOT
 毎日の講義連絡をLINEでお知らせしてくれるBOTです
-[詳細](https://github.com/hotaka-matsuoka/class_notification)
+
+[詳細説明](https://github.com/hotaka-matsuoka/class_notification)
 
 # 作ったきっかけ
 授業が休校だと気づかずに１時間半かけて通学したにも関わらず、教室には誰もいなかったという経験が何度かあった。
