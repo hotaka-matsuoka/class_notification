@@ -2,6 +2,7 @@ import date
 import schedule
 import time
 from flask import Flask, request, abort
+from flask_sqlalchemy import SQLAlchemy
 from settings import YOUR_CHANNEL_ACCESS_TOKEN, YOUR_CHANNEL_SECRET, USER_ID
 from scrapy import scrapy
 
@@ -16,6 +17,14 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///class_notification.db'
+db = SQLAlchemy(app)
+
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.String(7), nullable=False)
+    password = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.String, nullable=False)
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
