@@ -1,3 +1,6 @@
+# QRコード
+![738hluvi](https://user-images.githubusercontent.com/60139816/105445685-e6710500-5cb3-11eb-9281-82fe112b7e69.png)
+
 # スケジュール通知BOT
 毎日の講義連絡をLINEでお知らせしてくれるBOTです
 
