@@ -6,6 +6,15 @@
 
 [詳細説明](https://www.resume.id/works/2159b750fa1b163f)
 
+# 使用技術
+- Python 3.9.0
+- Flask 1.1.2
+- selenium 3.1
+- SQLAlchemy 1.3.22
+- sqlite3
+- LINE Messaging API
+- Heroku
+
 # 作ったきっかけ
 授業が休校だと気づかずに１時間半かけて通学したにも関わらず、教室には誰もいなかったという経験が何度かあった。
 
