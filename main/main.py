@@ -18,6 +18,7 @@ from linebot.models import (
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///class_notification.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Student(db.Model):
@@ -58,13 +59,22 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    text = event.message.text
+    if ('@' in text) and (text.count('@')) == 2:
+        user_information_dict = text.replace('@', '').split()
+        student_id = user_information_dict[0]
+        password = user_information_dict[1]
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=f"学籍番号とパスワードを登録しました\n学籍番号: {student_id}\nパスワード: {password}")
+            )
+        student_information = Student(student_id=student_id, password=password, user_id=event.source.userId)
+        db.session.add(student_information)
+        db.session.commit()
 
 
 if __name__ == "__main__":
-    # app.run()
+    app.run()
     # port = int(os.getenv("PORT"))
     # app.run(host="0.0.0.0", port=port)
     class_info_ary = scrapy()
