@@ -5,6 +5,7 @@ from flask import Flask, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from settings import YOUR_CHANNEL_ACCESS_TOKEN, YOUR_CHANNEL_SECRET, USER_ID
 from scrapy import scrapy
+from schedule import schedule_addtion
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -33,7 +34,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 def send_message(list):
     content = f"{date.month}月{date.day}日({date.day_of_week}) おはようございます!\n\n【 本日の時間割 】\n"
     for dict in list:
-        content += f"{dict['priod']}限 : {dict['subject']}\n {dict['classroom']}\n {dict['information']}\n\n"
+        content += f"{dict['period']}限 : {dict['subject']}\n {dict['classroom']}\n {dict['information']}\n\n"
     message = TextSendMessage(text=content)
     line_bot_api.push_message(USER_ID, message)
 
@@ -74,9 +75,10 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    app.run()
+    # app.run()
     # port = int(os.getenv("PORT"))
     # app.run(host="0.0.0.0", port=port)
     class_information_list = scrapy()
+    schedule_addtion(class_information_list)
     if not len(class_information_list) == 0:
         send_message(class_information_list)
