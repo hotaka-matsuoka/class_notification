@@ -32,8 +32,8 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 def send_message(list):
     content = f"{date.month}月{date.day}日({date.day_of_week}) おはようございます!\n\n【 本日の時間割 】\n"
-    for l in list:
-        content += f"{l[0]}限 : {l[1]}\n {l[2]}\n {l[3]}\n\n"
+    for dict in list:
+        content += f"{dict['priod']}限 : {dict['subject']}\n {dict['classroom']}\n {dict['information']}\n\n"
     message = TextSendMessage(text=content)
     line_bot_api.push_message(USER_ID, message)
 
@@ -77,6 +77,6 @@ if __name__ == "__main__":
     app.run()
     # port = int(os.getenv("PORT"))
     # app.run(host="0.0.0.0", port=port)
-    class_info_ary = scrapy()
-    if not len(class_info_ary) == 0:
-        send_message(class_info_ary)
+    class_information_list = scrapy()
+    if not len(class_information_list) == 0:
+        send_message(class_information_list)

@@ -22,27 +22,25 @@ def scrapy():
   driver.switch_to.frame(iframe)
   time.sleep(5)
 
-  class_info_ary = []
-  for i  in range(5):
+  class_information_list = []
+  for i in range(5):
     i += 1
-    class_info = []
     try:
       period = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}/dt').text
       subject = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}//a').text
       classroom = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"][1]/dl{[i]}/dd[2]').text
       try:
-        info = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"]/dl{[i]}//img').get_attribute('alt')
-        info = infomation_check(info)
+        information = driver.find_element_by_xpath(f'//tr[@class="timetable"]/td[@class="near"]/dl{[i]}//img').get_attribute('alt')
+        information = infomation_check(information)
       except:
-        info = "連絡事項はありません"
-
-      class_info.extend([period, subject, classroom, info])
-      class_info_ary.append(class_info)
+        information = "連絡事項はありません"
+      class_dict = dict(period=period, subject=subject, classroom=classroom, information=information)
+      class_information_list.append(class_dict)
     except:
       pass
   time.sleep(5)
   driver.quit()
-  return class_info_ary
+  return class_information_list
 
 def infomation_check(info):
   if info == "連絡":
