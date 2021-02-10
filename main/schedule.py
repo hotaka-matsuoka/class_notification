@@ -2,6 +2,7 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
+import date
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -10,7 +11,7 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 
-def schedule_addtion():
+def schedule_addtion(class_information_list):
     creds = None
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
@@ -26,22 +27,38 @@ def schedule_addtion():
             pickle.dump(creds, token)
 
     service = build('calendar', 'v3', credentials=creds)
+    for dict in class_information_list:
+        if dict['period'] == '1':
+            start_time = '09:00:00'
+            end_time = '10:30:00'
+        elif dict['period'] == '2':
+            start_time = '10:40:00'
+            end_time = '12:10:00'
+        elif dict['period'] == '3':
+            start_time = '13:00:00'
+            end_time = '14:30:00'
+        elif dict['period'] == '4':
+            start_time = '14:40:00'
+            end_time = '16:10:30'
+        else:
+            start_time = '16:20:00'
+            end_time = '17:50:30'
 
-    event = {
-      'summary': '予定1',
-      'location': 'Shibuya Office',
-      'description': 'サンプルの予定',
-      'start': {
-        'dateTime': '2021-02-10T09:00:00',
-        'timeZone': 'Japan',
-      },
-      'end': {
-        'dateTime': '2021-02-10T17:00:00',
-        'timeZone': 'Japan',
-      },
-    }
+        event = {
+        'summary': dict['subject'],
+        'location': dict['classroom'],
+        'description': dict['information'],
+        'start': {
+            'dateTime': f'{date.year}-{date.month}-{date.day}T{start_time}',
+            'timeZone': 'Japan',
+        },
+        'end': {
+            'dateTime': f'{date.year}-{date.month}-{date.day}T{end_time}',
+            'timeZone': 'Japan',
+        },
+        }
 
-    event = service.events().insert(calendarId='matsuhota108@gmail.com',
+        event = service.events().insert(calendarId='matsuhota108@gmail.com',
                                     body=event).execute()
     print (event['id'])
 if __name__ == '__main__':
