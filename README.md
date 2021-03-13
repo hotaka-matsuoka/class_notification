@@ -18,9 +18,9 @@
 - Python 3.9.0
 - Flask 1.1.2
 - selenium 3.1
-- SQLAlchemy 1.3.22
 - sqlite3
 - LINE Messaging API
+- Google Calendar API
 - Heroku
 
 ## キャプチャ
